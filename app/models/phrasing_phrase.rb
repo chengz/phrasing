@@ -1,5 +1,9 @@
 class PhrasingPhrase < ActiveRecord::Base
 
+  if defined?(AqminMultisite)
+    act_as_multisite
+  end
+
   validates_presence_of :key, :locale
 
   validate :uniqueness_of_key_on_locale_scope, on: :create
@@ -35,5 +39,5 @@ class PhrasingPhrase < ActiveRecord::Base
     def version_it
       PhrasingPhraseVersion.create_version(id, value) if value_was != value
     end
-    
+
 end

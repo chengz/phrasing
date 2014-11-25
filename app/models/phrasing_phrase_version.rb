@@ -1,4 +1,8 @@
 class PhrasingPhraseVersion < ActiveRecord::Base
+  if defined?(AqminMultisite)
+    act_as_multisite
+  end
+
   belongs_to :phrasing_phrase
 
   def self.create_version(phrasing_phrase_id, value)
@@ -7,5 +11,5 @@ class PhrasingPhraseVersion < ActiveRecord::Base
     phrasing_phrase_version.value = value
     phrasing_phrase_version.save
   end
-  
+
 end
